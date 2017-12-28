@@ -1,0 +1,36 @@
+syntax = "proto2";
+
+package redwood;
+
+import "third_party/redwood/base/device_profile_proto/proto/camera_model.proto";
+import "third_party/redwood/base/device_profile_proto/proto/imu_model.proto";
+import "third_party/redwood/base/linear_algebra_proto/proto/linear_algebra.proto";
+
+option optimize_for = SPEED;
+option java_package = "com.google.ar.device_profile";
+
+message DeviceProfileProto {
+    map<int32, CameraModelProto> cameras = 1;
+    map<int32, int32> camera_indexes = 2;
+    map<int32, ImuModelProto> imus = 3;
+    
+    repeated ExtrinsicCalibration extrinsic_calibrations = 4;
+    message ExtrinsicCalibration {
+        optional ExtrinsicsIds frame_a_id = 1;
+        optional ExtrinsicsIds frame_b_id = 2;
+        optional TransformationProto a_t_b = 3;
+    }
+    
+    enum ExtrinsicsIds {
+        CAMERA_ID_MOTION_TRACKING_PRIMARY = 0;
+        CAMERA_ID_COLOR_PRIMARY = 1;
+        CAMERA_ID_IR = 2;
+        CAMERA_ID_DEPTH = 3;
+        CAMERA_ID_MOTION_TRACKING_SECONDARY = 4;
+        GLOBAL_UNITY = 31;
+        ANDROID_FRAME = 40;
+        UNITY = 41;
+        OPENGL = 42;
+        IMU_0 = 100;
+    }
+}

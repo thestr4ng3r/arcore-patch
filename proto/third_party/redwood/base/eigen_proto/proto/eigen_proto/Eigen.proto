@@ -1,0 +1,30 @@
+syntax = "proto2";
+
+package eigen_proto.proto;
+
+option optimize_for = SPEED;
+option java_package = "com.google.tango.eigen_proto.proto";
+
+message MatrixXc {
+    optional uint32 rows = 1;
+    optional uint32 cols = 2;
+    optional bytes data = 3;
+}
+
+message MatrixXi {
+    optional uint32 rows = 1;
+    optional uint32 cols = 2;
+    repeated int32 data = 3 [packed = true];
+}
+
+message MatrixXf {
+    optional uint32 rows = 1;
+    optional uint32 cols = 2;
+    repeated float data = 3;
+}
+
+message MatrixXd {
+    optional uint32 rows = 1;
+    optional uint32 cols = 2;
+    repeated double data = 3;
+}

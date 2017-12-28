@@ -1,0 +1,16 @@
+syntax = "proto2";
+
+package timeseries_event_logger;
+
+option optimize_for = SPEED;
+option java_package = "com.google.tango.timeseries_event_logger";
+
+message Event {
+    optional int64 relative_timestamp_us = 1;
+    optional string event_tag = 2;
+    optional string event_message = 3;
+}
+
+message Events {
+    repeated Event events = 1;
+}

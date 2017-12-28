@@ -1,0 +1,32 @@
+syntax = "proto2";
+
+package redwood;
+
+import "third_party/redwood/base/eigen_proto/proto/eigen_proto/Eigen.proto";
+import "third_party/redwood/base/linear_algebra_proto/proto/linear_algebra.proto";
+
+option optimize_for = SPEED;
+
+message ImuModelProto {
+    optional Vector3Proto gyro_scale = 1;
+    optional Vector3Proto gyro_misalignment = 2;
+    optional Vector3Proto accel_scale = 3;
+    optional Vector3Proto accel_misalignment = 4;
+    optional QuaternionProto gyro_q_accel = 5;
+    optional double gyro_noise_sigma = 6;
+    optional double gyro_bias_sigma = 7;
+    optional double accel_noise_sigma = 8;
+    optional double accel_bias_sigma = 9;
+    optional Vector3Proto default_gyro_bias = 10;
+    optional Vector3Proto default_accel_bias = 11;
+    optional .eigen_proto.proto.MatrixXd g_sensitivity = 13;
+    optional int64 gyro_timestamp_alignment_nanoseconds = 14;
+    optional int64 accel_timestamp_alignment_nanoseconds = 15;
+    
+    optional GyroType gyro_type = 16;
+    enum GyroType {
+        GYROSCOPE_TYPE_UNKNOWN = 0;
+        GYROSCOPE_CALIBRATED = 1;
+        GYROSCOPE_UNCALIBRATED = 2;
+    }
+}

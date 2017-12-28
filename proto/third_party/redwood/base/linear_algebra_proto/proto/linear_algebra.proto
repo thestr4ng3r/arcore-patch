@@ -1,0 +1,29 @@
+syntax = "proto2";
+
+package redwood;
+
+option objc_class_prefix = "GARPB";
+option optimize_for = SPEED;
+
+message Vector2Proto {
+    optional double x = 1;
+    optional double y = 2;
+}
+
+message Vector3Proto {
+    optional double x = 1;
+    optional double y = 2;
+    optional double z = 3;
+}
+
+message QuaternionProto {
+    optional double w = 1;
+    optional double x = 2;
+    optional double y = 3;
+    optional double z = 4;
+}
+
+message TransformationProto {
+    optional Vector3Proto p = 1;
+    optional QuaternionProto q = 2;
+}

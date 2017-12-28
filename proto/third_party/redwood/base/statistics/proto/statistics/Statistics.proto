@@ -1,0 +1,15 @@
+syntax = "proto2";
+
+package statistics;
+
+option optimize_for = SPEED;
+option java_package = "com.google.tango.statistics";
+
+message StatisticsCollectionProto {
+    repeated StatisticsProto statistics = 1;
+}
+
+message StatisticsProto {
+    optional string tag = 1;
+    repeated double value = 2;
+}

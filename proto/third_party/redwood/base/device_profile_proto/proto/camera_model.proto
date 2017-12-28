@@ -1,0 +1,81 @@
+syntax = "proto2";
+
+package redwood;
+
+import "third_party/redwood/base/linear_algebra_proto/proto/linear_algebra.proto";
+
+option optimize_for = SPEED;
+
+message CameraModelProto {
+    optional CameraDirection camera_direction = 1;
+    enum CameraDirection {
+        CAMERA_DIRECTION_UNKNOWN = 0;
+        REAR_FACING = 1;
+        FRONT_FACING = 2;
+    }
+    
+    optional CameraType camera_type = 2;
+    enum CameraType {
+        CAMERA_TYPE_UNKNOWN = 0;
+        FEATURE_TRACKING_PRIMARY = 1;
+        FEATURE_TRACKING_SECONDARY = 2;
+        AR_PASSTHROUGH = 3;
+        DEPTH = 4;
+    }
+    
+    optional int64 rolling_shutter_readout_time_nanoseconds = 3;
+    
+    optional RollingShutterDirection rolling_shutter_direction = 4;
+    enum RollingShutterDirection {
+        ROLLING_SHUTTER_DIRECTION_UNKNOWN = 0;
+        POS_X_READOUT = 1;
+        NEG_X_READOUT = 2;
+        POS_Y_READOUT = 3;
+        NEG_Y_READOUT = 4;
+    }
+    
+    optional int64 camera_timestamp_alignment_nanoseconds = 5;
+    optional int32 width = 6;
+    optional int32 height = 7;
+    optional Vector2Proto focal_length = 8;
+    optional Vector2Proto principal_point = 9;
+    optional double cutoff_angle_radians = 13;
+    
+    optional ExposureTimestampMeaning exposure_timestamp_meaning = 14;
+    enum ExposureTimestampMeaning {
+        EXPOSURE_TIMESTAMP_MEANING_UNKNOWN = 0;
+        BEGINNING_OF_EXPOSURE = 1;
+        END_OF_EXPOSURE = 2;
+    }
+    
+    optional FrameRate frame_rate = 15;
+    enum FrameRate {
+        FRAME_RATE_UNKNOWN = 0;
+        FRAME_RATE_30_FPS = 1;
+        FRAME_RATE_60_FPS = 2;
+    }
+    
+    oneof distortion {
+        DistortionFoV distortion_fov = 10;
+        DistortionPoly3 distortion_poly3 = 11;
+        DistortionOpencv distortion_opencv = 12;
+    }
+    
+    message DistortionFoV {
+        optional double w = 1;
+    }
+    
+    message DistortionPoly3 {
+        optional double k0 = 1;
+        optional double k1 = 2;
+        optional double k2 = 3;
+    }
+    
+    message DistortionOpencv {
+        optional double k1 = 1;
+        optional double k2 = 2;
+        optional double k3 = 3;
+        optional double p1 = 4;
+        optional double p2 = 5;
+    }
+}
