@@ -40,7 +40,7 @@ Devices are hard-coded inside this library and are identified by an enum (just a
 | 1014       | kG8142G8142          |
 
 Obviously, `kMarlin` corresponds to the Pixel, `kSailfish` to the Pixel XL and so on. What is especially interesting here is that there are way more devices than the ones officially supported!
-There are also some values that I cannot make sense of yet, such as `kPeanut`, `kCoconut` and so on. Just a very wild guess: Maybe `Peanut` is the codename for Android 9 and this value makes the library load the profile from the system itself instead of hard-coding anything?
+~~There are also some values that I cannot make sense of yet, such as `kPeanut`, `kCoconut` and so on. Just a very wild guess: Maybe `Peanut` is the codename for Android 9 and this value makes the library load the profile from the system itself instead of hard-coding anything?~~ Peanut refers to Project Tango Peanut.
 
 For many of the listed devices, the apk then contains protobuf files (for some reason in text form, not the usual binary representation) in `assets` containing the profile data with exact calibration values for camera and IMU. Format definitions for these files recovered using [pbtk](https://github.com/marin-m/pbtk) are contained in this repository inside [proto](proto).
 
